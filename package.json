@@ -14,5 +14,10 @@
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "easy-http2": "^0.0.12",
+    "react": "^16.13.1",
+    "react-native-root-toast": "^3.2.1"
   }
 }
