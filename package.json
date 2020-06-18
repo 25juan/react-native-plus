@@ -1,0 +1,18 @@
+{
+  "name": "react-native-plus",
+  "version": "0.0.1",
+  "description": "react-native基础组件封装",
+  "repository": "https://github.com/25juan/react-native-plus.git",
+  "author": "sgellar <1216181067@qq.com>",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "parcel build -d build ./src/index.js",
+    "pub": "npm publish --access=public"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
