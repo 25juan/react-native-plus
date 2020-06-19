@@ -16,7 +16,7 @@
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
-    "easy-http2": "^0.0.12",
+    "easy-http2": "https://github.com/25juan/easy-http2.git",
     "react": "^16.13.1",
     "react-native": "^0.62.2",
     "react-native-root-siblings": "^4.0.6",
