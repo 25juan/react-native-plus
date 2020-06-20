@@ -13,9 +13,13 @@
     "pub": "npm publish --access=public"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4"
+    "@babel/core": "^7.10.3",
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^3.9.5"
   },
+
   "dependencies": {
+    "@babel/plugin-syntax-class-properties": "^7.10.1",
     "easy-http2": "https://github.com/25juan/easy-http2.git",
     "react-native-root-siblings": "^4.0.6",
     "react-native-root-toast": "^3.2.1"
