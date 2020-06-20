@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel build -d build ./src/index.js",
+    "build": "parcel build -d build ./src/index.ts",
     "pub": "npm publish --access=public"
   },
   "devDependencies": {
@@ -17,8 +17,6 @@
   },
   "dependencies": {
     "easy-http2": "https://github.com/25juan/easy-http2.git",
-    "react": "^16.13.1",
-    "react-native": "^0.62.2",
     "react-native-root-siblings": "^4.0.6",
     "react-native-root-toast": "^3.2.1"
   }

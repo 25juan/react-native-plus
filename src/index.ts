@@ -1,7 +1,7 @@
 import PlusInterface, {ActionSheet, Loading, Modal, Position, Toast} from "./types";
 import RNRToast from 'react-native-root-toast';
 
-const Plus: PlusInterface = {
+const Index: PlusInterface = {
   toast: null,
 
   hideLoading(): void {
@@ -30,8 +30,7 @@ const Plus: PlusInterface = {
     }
     this.toast = RNRToast.show(option.title, { duration: option.duration, position, onShown: option.success })
   }
-
 };
 
-export default Plus
+export default Index
 
