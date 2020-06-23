@@ -18,24 +18,27 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
+import { RootSiblingParent } from "react-native-root-siblings"
 import Plus,{ Position } from "./src";
 
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView>
-          <View style={styles.row}>
-            <Button onPress={()=>Plus.showToast({ title:"hello world",position:Position.TOP })} title={"点击调用toast"}/>
-          </View>
-          <Button onPress={()=>Plus.showToast({ title:"hello world",position:Position.CENTER })} title={"点击调用toast"}/>
-          <Button onPress={()=>Plus.showToast({ title:"hello world",position:Position.BOTTOM })} title={"点击调用toast"}/>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+      <RootSiblingParent>
+        <>
+          <StatusBar barStyle="dark-content" />
+          <SafeAreaView>
+            <ScrollView>
+              <View style={styles.row}>
+                <Button onPress={()=>Plus.showToast({ title:"hello world",position:Position.TOP })} title={"点击调用toast"}/>
+              </View>
+              <Button onPress={()=>Plus.showToast({ title:"hello world",position:Position.CENTER })} title={"点击调用toast"}/>
+              <Button onPress={()=>Plus.showToast({ title:"hello world",position:Position.BOTTOM })} title={"点击调用toast"}/>
+            </ScrollView>
+          </SafeAreaView>
+        </>
+      </RootSiblingParent>
   );
 };
 

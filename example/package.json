@@ -10,6 +10,9 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "easy-http2": "https://github.com/25juan/easy-http2.git",
+    "react-native-root-siblings": "^4.0.6",
+    "react-native-root-toast": "^3.2.1",
     "react": "16.11.0",
     "react-native": "0.62.2"
   },

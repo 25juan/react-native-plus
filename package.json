@@ -17,10 +17,10 @@
     "parcel-bundler": "^1.12.4",
     "typescript": "^3.9.5"
   },
-
   "dependencies": {
     "@babel/plugin-syntax-class-properties": "^7.10.1",
     "easy-http2": "https://github.com/25juan/easy-http2.git",
+    "prop-types": "^15.7.2",
     "react-native-root-siblings": "^4.0.6",
     "react-native-root-toast": "^3.2.1"
   }
