@@ -36,5 +36,11 @@
   "devDependencies": {
     "react": "^16.9.0",
     "react-native": "^0.61.5"
+  },
+  "dependencies": {
+    "easy-http2": "^0.0.13",
+    "prop-types": "^15.7.2",
+    "react-native-root-siblings": "^4.0.6",
+    "react-native-root-toast": "^3.2.1"
   }
 }

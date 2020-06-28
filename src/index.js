@@ -1,19 +1,17 @@
-import PlusInterface, {ActionSheet, Loading, Modal, Position, Toast} from "./types";
 import RNRToast from 'react-native-root-toast';
-
-const Plus: PlusInterface = {
+export default {
   toast: null,
 
-  hideLoading(): void {
+  hideLoading() {
 
   },
-  showActionSheet(option: ActionSheet): void {
+  showActionSheet(option) {
 
   },
-  showLoading(option: Loading): void {
+  showLoading(option) {
 
   },
-  showModal(option: Modal): void {
+  showModal(option) {
 
   },
   hideToast(){
@@ -21,7 +19,7 @@ const Plus: PlusInterface = {
       RNRToast.hide(this.toast)
     }
   },
-  showToast(option: Toast): void {
+  showToast(option) {
     let position = RNRToast.positions.CENTER
     if (option.position === Position.TOP) {
       position = RNRToast.positions.TOP
@@ -30,7 +28,5 @@ const Plus: PlusInterface = {
     }
     this.toast = RNRToast.show(option.title, { duration: option.duration, position, onShown: option.success })
   }
-};
-
-export default Plus
+}
 
