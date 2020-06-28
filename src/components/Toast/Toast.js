@@ -17,8 +17,8 @@ const TOAST_MAX_WIDTH = 0.8;
 const TOAST_ANIMATION_DURATION = 200;
 
 const positions = {
-  TOP: 20,
-  BOTTOM: -20,
+  TOP: 50,
+  BOTTOM: -50,
   CENTER: 0
 };
 
@@ -58,9 +58,7 @@ let styles = StyleSheet.create({
   }
 });
 
-class ToastContainer extends Component {
-  static displayName = 'ToastContainer';
-
+class Toast extends Component {
   static propTypes = {
     ...ViewPropTypes,
     containerStyle: ViewPropTypes.style,
@@ -268,7 +266,7 @@ class ToastContainer extends Component {
   }
 }
 
-export default ToastContainer;
+export default Toast;
 export {
   positions,
   durations

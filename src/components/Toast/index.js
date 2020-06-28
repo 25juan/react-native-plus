@@ -8,7 +8,6 @@ import RootSiblings from 'react-native-root-siblings';
 import ToastContainer, {positions, durations} from './ToastContainer';
 
 class Toast extends Component {
-  static displayName = 'Toast';
   static propTypes = ToastContainer.propTypes;
   static positions = positions;
   static durations = durations;
