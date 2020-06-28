@@ -1,4 +1,4 @@
-import RNRToast from 'react-native-root-toast';
+import Toast from "./components/Toast";
 export default {
   toast: null,
 
@@ -19,14 +19,15 @@ export default {
       RNRToast.hide(this.toast)
     }
   },
+  /**
+   * 显示toast
+   * @param {Object} option 显示toast的配置项
+   * @param {string} option.title 显示的文本内容
+   * @param {number} option.duration 显示时长
+   * @param {number} option.position 显示位置
+   */
   showToast(option) {
-    let position = RNRToast.positions.CENTER
-    if (option.position === Position.TOP) {
-      position = RNRToast.positions.TOP
-    } else if (option.position === Position.BOTTOM) {
-      position = RNRToast.positions.BOTTOM
-    }
-    this.toast = RNRToast.show(option.title, { duration: option.duration, position, onShown: option.success })
+    Toast.show(option.title,option)
   }
 }
 
