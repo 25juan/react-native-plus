@@ -1,4 +1,5 @@
 import React from  "react" ;
+import { Text } from "react-native";
 import RootSiblings from "react-native-root-siblings"
 class Portal {
   Portal = null ;
@@ -7,6 +8,7 @@ class Portal {
   constructor(Portal,initProps) {
     this.Portal = Portal ;
     this.initProps = initProps || {};
+    this.create()
   }
   create(props = { }){
     if(this.portal){
@@ -14,7 +16,7 @@ class Portal {
       return this ;
     }
     const Portal = this.Portal
-    this.portal = new RootSiblings( <Portal { ...this.initProps } { ...props }/>)
+    this.portal = new RootSiblings(<Portal { ...this.initProps } { ...props }/>) //
     return this ;
   }
   update(props){

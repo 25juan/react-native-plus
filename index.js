@@ -1,5 +1,8 @@
 import { NativeModules } from 'react-native';
-
+import PlusTools from "./src" ;
+import { RootSiblingParent  } from "react-native-root-siblings"
 const { Plus } = NativeModules;
-
-export default Plus;
+export const Portal = RootSiblingParent ;
+export default {
+  ...PlusTools
+};
