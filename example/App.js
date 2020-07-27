@@ -9,7 +9,7 @@
  */
 
 import React, { Component } from 'react';
-import { Platform,Button, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView,Button, StyleSheet, Text, View } from 'react-native';
 import Plus,{ Portal } from 'react-native-plus';
 
 export default class App extends Component {
@@ -27,17 +27,19 @@ export default class App extends Component {
   }
   render() {
     return (
-      <Portal>
-        <View style={styles.container}>
-          <Button title={"显示toast"} onPress={() => Plus.showToast({
-            title:"hello world"
-          })}/>
-          <Text style={styles.welcome}>☆Plus example☆</Text>
-          <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
-          <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
-          <Text style={styles.instructions}>{this.state.message}</Text>
-        </View>
-      </Portal>
+      <SafeAreaView style={{ flex:1 }}>
+        <Portal>
+          <View style={styles.container}>
+            <Button title={"显示toast"} onPress={() => Plus.showToast({
+              title:"hello world"
+            })}/>
+            <Text style={styles.welcome}>☆Plus example☆</Text>
+            <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
+            <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
+            <Text style={styles.instructions}>{this.state.message}</Text>
+          </View>
+        </Portal>
+      </SafeAreaView>
     );
   }
 }

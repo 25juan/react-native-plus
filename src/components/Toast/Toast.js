@@ -38,54 +38,54 @@ export default class Toast extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      opacity: new Animated.Value(0),
-      visible: props.visible,
-      mask: props.mask
-    }
+    // this.state = {
+    //   opacity: new Animated.Value(0),
+    //   visible: props.visible,
+    //   mask: props.mask
+    // }
   }
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if(this.state.visible){
-      this._show()
-    }else {
-      this._hide()
-    }
-  }
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   if(this.state.visible){
+  //     this._show()
+  //   }else {
+  //     this._hide()
+  //   }
+  // }
 
-  _show() {
-    if(this.timer) {
-      clearTimeout(this.timer) ;
-      this._hide(this._show)
-      return ;
-    }
-    Animated.timing(this.state.opacity, {
-      toValue: 1,
-      duration: 500
-    }).start(({finished}) => {
-      if (finished) {
-        this.setState({visible: true, opacity: new Animated.Value(1)})
-        this.timer = setTimeout(this._hide,this.props.duration)
-      }
-    });
-  }
+  // _show() {
+  //   if(this.timer) {
+  //     clearTimeout(this.timer) ;
+  //     this._hide(this._show)
+  //     return ;
+  //   }
+  //   Animated.timing(this.state.opacity, {
+  //     toValue: 1,
+  //     duration: 500
+  //   }).start(({finished}) => {
+  //     if (finished) {
+  //       this.setState({visible: true, opacity: new Animated.Value(1)})
+  //       this.timer = setTimeout(this._hide,this.props.duration)
+  //     }
+  //   });
+  // }
 
-  _hide = (callback) => {
-    Animated.timing(this.state.opacity, {
-      toValue: 0,
-      duration: 500
-    }).start(({finished}) => {
-      if (finished) {
-        this.setState({visible: false, opacity: new Animated.Value(0)},callback)
-      }
-    });
-  }
+  // _hide = (callback) => {
+  //   Animated.timing(this.state.opacity, {
+  //     toValue: 0,
+  //     duration: 500
+  //   }).start(({finished}) => {
+  //     if (finished) {
+  //       this.setState({visible: false, opacity: new Animated.Value(0)},callback)
+  //     }
+  //   });
+  // }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.visible !== prevState.visible) {
-      return {visible: nextProps.visible, mask: nextProps.mask}
-    }
-    return null
-  }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   if (nextProps.visible !== prevState.visible) {
+  //     return {visible: nextProps.visible, mask: nextProps.mask}
+  //   }
+  //   return null
+  // }
 
   get maskStyle() {
     if (this.props.position > 0) {
@@ -108,15 +108,14 @@ export default class Toast extends Component {
   }
 
   render() {
-    const props = this.props
-    const maskStyle = props.mask ? [Styles.maskBox, this.noMaskBox, props.maskStyle] : [Styles.noMaskBox, this.maskStyle]
-    if(!this.state.visible){
+    const props = this.props;
+    const maskStyle = props.mask ? [Styles.maskBox, this.noMaskBox, props.maskStyle] : [Styles.noMaskBox, this.maskStyle,{ bottom: 0 }] ;
+    if(!this.props.visible){
       return null ;
     }
-    console.log(this.state.visible)
     return (
       <View style={maskStyle}>
-        <Animated.View style={[Styles.box, props.boxStyle, {opacity: this.state.opacity}]}>
+        <Animated.View style={[Styles.box, props.boxStyle, { opacity:1 }]}>
           <Text style={[Styles.text, props.textStyle]}>hello world</Text>
         </Animated.View>
       </View>)
@@ -125,13 +124,11 @@ export default class Toast extends Component {
 }
 const Styles = StyleSheet.create({
   maskBox: {
-    backgroundColor: 'red',
+    backgroundColor: 'transparent',
     zIndex: 99,
-    display: "none",
     position: 'absolute',
     top: 0,
     left: 0,
-    bottom: 0,
     right: 0,
     flexDirection: 'column',
     alignItems: 'center',
