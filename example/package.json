@@ -13,6 +13,7 @@
     "easy-http2": "^0.0.13",
     "react": "16.13.1",
     "react-native": "0.63.2",
+    "react-native-actionsheet": "^2.4.2",
     "react-native-plus": "link:../"
   },
   "devDependencies": {

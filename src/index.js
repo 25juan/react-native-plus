@@ -1,4 +1,4 @@
-import {toast,loading } from "./components/Portal";
+import {toast,loading,actionSheet } from "./components/Portal";
 export Portal  from "./components/Portal";
 function invoke(obj,method,params) {
   if(!obj){
@@ -10,7 +10,7 @@ export default {
   toast: null,
 
   showActionSheet(option) {
-
+    invoke(actionSheet,'show',option)
   },
   showLoading(option) {
     invoke(loading,'show',option)

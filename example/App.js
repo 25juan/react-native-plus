@@ -47,6 +47,13 @@ export default class App extends Component{
           },2000)
         }}/>
 
+        <Button title={"点击显示ActionSheet"} onPress={()=>{
+          Plus.showActionSheet({
+            title:'请选择',
+            itemList: ['香蕉','梨子']
+          });
+        }}/>
+
         <Button title={"点击显示loading 主题3"} onPress={()=>{
           Plus.Loading.setIndicatorProps({ // 设置loading的颜色
             color:'#f50', size:'large' })
@@ -58,7 +65,16 @@ export default class App extends Component{
             Plus.hideLoading()
           },2000)
         }}/>
-
+        <Button title={"点击显示action sheet"} onPress={()=>{
+          Plus.showActionSheet({
+            title:'请选择',
+            message:'请选择一种水果',
+            itemList: ['香蕉','梨子','关闭'],
+            success(tapIndex) {
+              console.log(tapIndex)
+            }
+          });
+        }}/>
         <Text style={styles.welcome}>☆Plus example☆</Text>
         <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
         <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>

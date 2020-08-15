@@ -39,4 +39,14 @@ Plus.showLoading({
   title:'数据加载中...',
   theme: Plus.Loading.THEME.THEME3
 }); // 使用主题三
+
+// actionsheet
+Plus.showActionSheet({
+  title:'请选择',
+  message:'请选择一种水果',
+  itemList: ['香蕉','梨子','关闭'],
+  success(tapIndex) { // 点击之后的回调函数，数组的下标
+    console.log(tapIndex)
+  }
+});
 ```
