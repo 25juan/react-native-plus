@@ -1,6 +1,5 @@
 import React from "react" ;
 import {View, Text, StyleSheet, Animated, Dimensions,} from "react-native" ;
-import PropTypes from "prop-types";
 
 /**
  *
@@ -18,8 +17,8 @@ export default class Toast extends React.Component {
     BOTTOM: -50
   };
   static DURATION = {
-    LONG: 3500,
-    SHORT: 2000
+    LONG: 5000,
+    SHORT: 3500
   };
   state = {
     visible: false,
@@ -27,7 +26,8 @@ export default class Toast extends React.Component {
     position: Toast.POSITION.TOP
   };
   constructor(props) {
-    super(props)
+    super(props);
+    this.animateValue = new Animated.Value(0);
   }
 
   get maskStyle() {
@@ -56,7 +56,12 @@ export default class Toast extends React.Component {
     if(this.state.visible){
       this.timer && clearTimeout(this.timer) ;
     }
-    this.setState({ ...state,visible:true });
+    this.setState({ ...state,visible:true },() => {
+      Animated.timing(this.animateValue, {
+        toValue: 1,
+        duration: 300
+      },{ useNativeDriver:false }).start();
+    });
     this.timer = setTimeout(() => {
       this.hide()
     },state.duration || Toast.DURATION.SHORT);
@@ -70,7 +75,12 @@ export default class Toast extends React.Component {
     if(this.timer){
       clearTimeout(this.timer) ;
     }
-    this.setState({ ...state });
+    Animated.timing(this.animateValue, {
+      toValue: 0,
+      duration: 300
+    },{ useNativeDriver:false }).start(() => {
+      this.setState({ ...state });
+    });
   };
 
   render() {
@@ -80,9 +90,9 @@ export default class Toast extends React.Component {
     }
     return (
       <View style={[Styles.maskBox, this.maskStyle]}>
-        <View style={[Styles.box, props.boxStyle]}>
+        <Animated.View style={[Styles.box, props.boxStyle,{ opacity: this.animateValue }]}>
           <Text style={[Styles.text, props.textStyle]}>{this.state.title}</Text>
-        </View>
+        </Animated.View>
       </View>)
   }
 

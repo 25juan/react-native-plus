@@ -51,7 +51,6 @@ export default class Loading extends React.Component {
   render() {
     const theme = themes[this.state.theme] ;
     const indicator = indicatorProps ||  theme.indicatorProps || {} ;
-    console.log(indicatorProps,indicator)
     return (
       <Modal visible={this.state.visible} animationType={"fade"} transparent>
         <View style={[theme.maskBox]}>

@@ -1,4 +1,4 @@
-import {toast,loading,actionSheet } from "./components/Portal";
+import {toast, loading, actionSheet, alert} from "./components/Portal";
 export Portal  from "./components/Portal";
 function invoke(obj,method,params) {
   if(!obj){
@@ -21,7 +21,10 @@ export default {
 
   },
   showModal(option) {
-
+    invoke(alert,'show',option)
+  },
+  hideModal() {
+    invoke(alert,'hide')
   },
   /**
    * 手动关闭toast

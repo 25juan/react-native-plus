@@ -35,6 +35,9 @@ export default class App extends Component{
 
         <Button title={"点击显示loading"} onPress={()=>{
           Plus.showLoading('数据加载中...');
+          setTimeout(() =>{
+            Plus.hideLoading()
+          },2000)
         }}/>
 
         <Button title={"点击显示loading 主题2"} onPress={()=>{
@@ -45,13 +48,6 @@ export default class App extends Component{
           setTimeout(() =>{
             Plus.hideLoading()
           },2000)
-        }}/>
-
-        <Button title={"点击显示ActionSheet"} onPress={()=>{
-          Plus.showActionSheet({
-            title:'请选择',
-            itemList: ['香蕉','梨子']
-          });
         }}/>
 
         <Button title={"点击显示loading 主题3"} onPress={()=>{
@@ -75,6 +71,17 @@ export default class App extends Component{
             }
           });
         }}/>
+
+        <Button title={"点击显示弹框"} onPress={()=>{
+          Plus.showModal({
+            title:"消息",
+            message:'hello world',
+            onConfirm(){
+              Plus.hideModal()
+            }
+          });
+        }}/>
+
         <Text style={styles.welcome}>☆Plus example☆</Text>
         <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
         <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
