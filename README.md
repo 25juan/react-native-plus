@@ -11,6 +11,19 @@
 ## 用法
 ```javascript
 import Plus from 'react-native-plus';
+import { Platform,Button, StyleSheet, Text, View } from 'react-native';
+import Plus,{ Portal,Component } from 'react-native-plus';
+import React  from 'react';
+//  在你的根组件中用 Portal组件
+export class App extends Component {
+  render(){
+    return <View>
+                   <Portal/>
+          </View>
+  }
+}
+
+
 // Toast组件
 Plus.showToast('hello toast') // or
 Plus.showToast({ title:"hello",duration: Plus.Toast.DURATION.LONG,position: Plus.Toast.POSITION.CENTER })
