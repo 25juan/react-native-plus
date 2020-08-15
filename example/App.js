@@ -8,9 +8,9 @@
  * https://github.com/facebook/react-native
  */
 
-import React, { Component } from 'react';
+import React  from 'react';
 import { Platform,Button, StyleSheet, Text, View } from 'react-native';
-import Plus,{ Portal } from 'react-native-plus';
+import Plus,{ Portal,Component } from 'react-native-plus';
 
 export default class App extends Component{
   state = {
