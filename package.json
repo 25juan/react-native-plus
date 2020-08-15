@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "react": "^16.9.0",
-    "react-native": "^0.61.5"
+    "react-native": "^0.61.5",
+    "easy-http2":"^0.0.13"
   }
 }
