@@ -49,4 +49,17 @@ Plus.showActionSheet({
     console.log(tapIndex)
   }
 });
+
+// 弹框
+Plus.showModal({
+  title:"消息",
+  message:'hello world',
+  showCancel: true,
+  showConfirm: true,
+  textCancel: "关闭",
+  textConfirm: "确认",
+  onConfirm(){
+    Plus.hideModal()
+  }
+});
 ```
