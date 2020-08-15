@@ -9,10 +9,10 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-import Plus from 'react-native-plus';
+import { Platform,Button, StyleSheet, Text, View } from 'react-native';
+import Plus,{ Portal } from 'react-native-plus';
 
-export default class App extends Component<{}> {
+export default class App extends Component{
   state = {
     status: 'starting',
     message: '--'
@@ -28,6 +28,10 @@ export default class App extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
+        <Portal/>
+        <Button title={"点击显示toast在顶部"} onPress={()=>Plus.showToast({ title:"hellhho",duration: Plus.Toast.DURATION.LONG,position: Plus.Toast.POSITION.TOP })}/>
+        <Button title={"点击显示toast在中部"} onPress={()=>Plus.showToast({ title:"hello",duration: Plus.Toast.DURATION.LONG,position: Plus.Toast.POSITION.CENTER })}/>
+        <Button title={"点击显示toast在底部"} onPress={()=>Plus.showToast({ title:"hello",duration: Plus.Toast.DURATION.LONG,position: Plus.Toast.POSITION.BOTTOM })}/>
         <Text style={styles.welcome}>☆Plus example☆</Text>
         <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
         <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
