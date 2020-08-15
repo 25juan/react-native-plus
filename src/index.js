@@ -1,5 +1,5 @@
-import {toast} from "./components/Portal";
-export Portal,{ toast } from "./components/Portal";
+import {toast,loading } from "./components/Portal";
+export Portal  from "./components/Portal";
 function invoke(obj,method,params) {
   if(!obj){
     return
@@ -9,13 +9,15 @@ function invoke(obj,method,params) {
 export default {
   toast: null,
 
-  hideLoading() {
-
-  },
   showActionSheet(option) {
 
   },
   showLoading(option) {
+    invoke(loading,'show',option)
+
+  },
+  hideLoading() {
+    invoke(loading,'hide')
 
   },
   showModal(option) {
@@ -37,7 +39,6 @@ export default {
    * @param {number} option.position 显示位置
    */
   showToast(option) {
-    // Toast.show(option.title,option)
     invoke(toast,'show',option)
   }
 }

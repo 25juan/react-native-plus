@@ -32,6 +32,19 @@ export default class App extends Component{
         <Button title={"点击显示toast在顶部"} onPress={()=>Plus.showToast('hello toast')}/>
         <Button title={"点击显示toast在中部"} onPress={()=>Plus.showToast({ title:"hello",duration: Plus.Toast.DURATION.LONG,position: Plus.Toast.POSITION.CENTER })}/>
         <Button title={"点击显示toast在底部"} onPress={()=>Plus.showToast({ title:"hello",duration: Plus.Toast.DURATION.LONG,position: Plus.Toast.POSITION.BOTTOM })}/>
+
+        <Button title={"点击显示loading"} onPress={()=>{
+          Plus.showLoading('数据加载中...');
+        }}/>
+        <Button title={"点击显示loading 主题2"} onPress={()=>{
+          Plus.Loading.setIndicatorProps({ // 设置loading的颜色
+            color:'#f50', size:'large' })
+          Plus.showLoading({
+            title:'数据加载中...',
+            theme: Plus.Loading.THEME.THEME3
+          });
+        }}/>
+
         <Text style={styles.welcome}>☆Plus example☆</Text>
         <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
         <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>

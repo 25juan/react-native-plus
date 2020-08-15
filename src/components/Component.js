@@ -7,6 +7,7 @@ export default class Component extends React.Component {
   $$bool = easyHttp2.bool ;
   showToast =  Plus.showToast ;
   showLoading = Plus.showLoading ;
+  hideLoading = Plus.hideLoading
   showActionSheet = Plus.showActionSheet ;
   showModal = Plus.showModal ;
 }
