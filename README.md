@@ -14,7 +14,7 @@ import Plus from 'react-native-plus';
 import { Platform,Button, StyleSheet, Text, View } from 'react-native';
 import Plus,{ Portal,Component } from 'react-native-plus';
 import React  from 'react';
-//  在你的根组件中用 Portal组件
+//  在你的根组件中用 Portal组件, 如果是继承了 react-native-plus 的component 则可以直接使用this.方法 来代替Plus.方法
 export class App extends Component {
   render(){
     return (
