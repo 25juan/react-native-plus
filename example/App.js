@@ -36,7 +36,18 @@ export default class App extends Component{
         <Button title={"点击显示loading"} onPress={()=>{
           Plus.showLoading('数据加载中...');
         }}/>
+
         <Button title={"点击显示loading 主题2"} onPress={()=>{
+          Plus.showLoading({
+            title:'数据加载中...',
+            theme: Plus.Loading.THEME.THEME2
+          });
+          setTimeout(() =>{
+            Plus.hideLoading()
+          },2000)
+        }}/>
+
+        <Button title={"点击显示loading 主题3"} onPress={()=>{
           Plus.Loading.setIndicatorProps({ // 设置loading的颜色
             color:'#f50', size:'large' })
           Plus.showLoading({
