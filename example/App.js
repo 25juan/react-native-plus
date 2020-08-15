@@ -43,6 +43,9 @@ export default class App extends Component{
             title:'数据加载中...',
             theme: Plus.Loading.THEME.THEME3
           });
+          setTimeout(() =>{
+            Plus.hideLoading()
+          },2000)
         }}/>
 
         <Text style={styles.welcome}>☆Plus example☆</Text>
