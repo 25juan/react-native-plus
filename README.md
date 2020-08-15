@@ -1,17 +1,16 @@
 # react-native-plus
 
-## Getting started
+## 安装
 
-`$ npm install react-native-plus --save`
+`npm install react-native-plus --save`
 
-### Mostly automatic installation
+### 自动link
 
 `$ react-native link react-native-plus`
 
-## Usage
+## 用法
 ```javascript
 import Plus from 'react-native-plus';
-
-// TODO: What to do with the module?
-Plus;
+Plus.showToast('hello toast') // or
+Plus.showToast({ title:"hello",duration: Plus.Toast.DURATION.LONG,position: Plus.Toast.POSITION.CENTER })
 ```

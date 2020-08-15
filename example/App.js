@@ -29,7 +29,7 @@ export default class App extends Component{
     return (
       <View style={styles.container}>
         <Portal/>
-        <Button title={"点击显示toast在顶部"} onPress={()=>Plus.showToast({ title:"hellhho",duration: Plus.Toast.DURATION.LONG,position: Plus.Toast.POSITION.TOP })}/>
+        <Button title={"点击显示toast在顶部"} onPress={()=>Plus.showToast('hello toast')}/>
         <Button title={"点击显示toast在中部"} onPress={()=>Plus.showToast({ title:"hello",duration: Plus.Toast.DURATION.LONG,position: Plus.Toast.POSITION.CENTER })}/>
         <Button title={"点击显示toast在底部"} onPress={()=>Plus.showToast({ title:"hello",duration: Plus.Toast.DURATION.LONG,position: Plus.Toast.POSITION.BOTTOM })}/>
         <Text style={styles.welcome}>☆Plus example☆</Text>
