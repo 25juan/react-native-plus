@@ -17,9 +17,10 @@ import React  from 'react';
 //  在你的根组件中用 Portal组件
 export class App extends Component {
   render(){
-    return <View>
-                   <Portal/>
-          </View>
+    return (
+          <View>
+              <Portal/>
+          </View>)
   }
 }
 
