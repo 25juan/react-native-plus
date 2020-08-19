@@ -9,9 +9,9 @@
  */
 
 import React from 'react';
-import {ScrollView, Button, StyleSheet, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+import {ScrollView, Image, StyleSheet, SafeAreaView,Animated, Text, TouchableOpacity, View} from 'react-native';
 import Plus, {Portal, Component} from 'react-native-aplus';
-
+const animateValue = new Animated.Value(0);
 export default class App extends Component {
   state = {
     status: 'starting',
@@ -27,6 +27,17 @@ export default class App extends Component {
       });
     });
   }
+
+  startAnimate =() => {
+    Animated.timing(animateValue, {
+      toValue: 360,
+      duration: 500,
+      useNativeDriver: true
+    }).start(() => {
+      animateValue.setValue(0)
+      this.startAnimate()
+    });
+  };
 
   render() {
     const navigation = this.props.navigation ;
@@ -96,8 +107,13 @@ export default class App extends Component {
 
           <TouchableOpacity style={styles.row} onPress={() => {
             this.setState({
-              customActivityIndicator: () => <Text style={{color: '#f50'}}>我是自定义的图标</Text>
+
+              customActivityIndicator: () => <Animated.Image  source={require("./images/loading.png")} style={[styles.icon,{ transform:[{ rotate: animateValue.interpolate({
+                    inputRange: [0, 360],
+                    outputRange: ['0deg', '360deg']
+                  }) }] }]}/>
             }, () => {
+              this.startAnimate();
               Plus.showLoading({
                 title: '数据加载中...',
                 theme: Plus.Loading.THEME.THEME3
@@ -106,7 +122,7 @@ export default class App extends Component {
                 this.setState({
                   customActivityIndicator: null
                 }, () => Plus.hideLoading())
-              }, 2000)
+              }, 5000)
             });
           }}>
             <Text style={styles.textStyle}>自定义loading图标</Text>
@@ -216,5 +232,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     color: "#333"
+  },
+  icon:{
+    height:30,
+    width:30,
+    resizeMode:"contain"
   }
 });
