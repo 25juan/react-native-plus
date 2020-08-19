@@ -1,5 +1,5 @@
 import React, {Component} from "react" ;
-import {Modal, Image, View, Text, TouchableOpacity, Platform} from "react-native";
+import {Modal, Image, View, Text, TouchableOpacity, Animated} from "react-native";
 export const textLargeSize = 16 ;
 export const descTextSize = 14 ;
 export const infoTextSize = 12 ;
@@ -9,7 +9,10 @@ export default class extends Component {
         visible: false,
         shareList:defaultList
     };
-
+    constructor(props){
+        super(props);
+        this.animateValue = new Animated.Value(0);
+    }
     onItemPress = (type) => {
         typeof this.success === "function" && this.success(type);
         this.hide()
@@ -21,13 +24,25 @@ export default class extends Component {
             ...option
         };
         this.success = option.success || function(item){}
-        this.setState({ ...state,visible:true })
+        this.setState({ ...state,visible:true },() => {
+            Animated.timing(this.animateValue, {
+                toValue: 1,
+                duration: 300,
+                useNativeDriver:false
+            },{ useNativeDriver:false }).start();
+        })
     };
 
     hide = () => {
-        this.setState({
-            visible: false,
-            shareList:defaultList
+        Animated.timing(this.animateValue, {
+            toValue: 0,
+            duration: 300,
+            useNativeDriver:false
+        },{ useNativeDriver:false }).start(({ finished }) => {
+            this.setState({
+                visible: false,
+                shareList:defaultList
+            });
         });
     };
 
@@ -40,7 +55,7 @@ export default class extends Component {
                 animationType={'fade'}
                 visible={this.state.visible}>
                 <TouchableOpacity onPress={()=>this.hide()} activeOpacity={1} style={Style.containerStyle}>
-                    <View style={Style.contentStyle}>
+                    <Animated.View style={[Style.contentStyle,{ opacity:this.animateValue,transform: [{ scale: this.animateValue }] }]}>
                         <View style={Style.titleContainerStyle}>
                             <Text style={Style.titleStyle}>分享</Text>
                         </View>
@@ -75,7 +90,7 @@ export default class extends Component {
                             </TouchableOpacity>
                         </View>
 
-                    </View>
+                    </Animated.View>
                 </TouchableOpacity>
             </Modal>
         )

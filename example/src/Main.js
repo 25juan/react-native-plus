@@ -161,7 +161,7 @@ export default class App extends Component {
           <TouchableOpacity style={styles.row} onPress={() => {
             navigation.push("FlatList")
           }}>
-            <Text style={styles.textStyle}>FlatList(未完成)</Text>
+            <Text style={styles.textStyle}>FlatList</Text>
           </TouchableOpacity>
           <View style={styles.section}>
             <Text style={styles.titleStyle}>ShareCard</Text>
