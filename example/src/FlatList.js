@@ -1,6 +1,6 @@
 import React from "react" ;
 import {StyleSheet, Text} from "react-native";
-import { FlatList } from "react-native-plus" ;
+import { FlatList } from "react-native-aplus" ;
 import {View,} from "react-native";
 let collection = [] ;
 function fetchData(data) {

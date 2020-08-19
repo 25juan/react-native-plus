@@ -1,7 +1,7 @@
 {
   "name": "react-native-aplus",
   "title": "React Native a Plus plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "react native 日常工具类",
   "main": "index.js",
   "files": [
@@ -24,8 +24,8 @@
     "react-native"
   ],
   "author": {
-    "name": "Your Name",
-    "email": "yourname@email.com"
+    "name": "25juan",
+    "email": "1216181067@qq.com"
   },
   "license": "MIT",
   "licenseFilename": "LICENSE",

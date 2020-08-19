@@ -10,7 +10,7 @@
 
 import React from 'react';
 import {ScrollView, Button, StyleSheet, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
-import Plus, {Portal, Component} from 'react-native-plus';
+import Plus, {Portal, Component} from 'react-native-aplus';
 
 export default class App extends Component {
   state = {

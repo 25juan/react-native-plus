@@ -2,15 +2,15 @@
 
 ## 安装
 
-`npm install react-native-plus --save`
+`npm install react-native-aplus --save`
 
 ### 自动link
 
-`$ react-native link react-native-plus`
+`$ react-native link react-native-aplus`
 
 ## 用法
 ```javascript
-import Plus from 'react-native-plus';
+import Plus from 'react-native-aplus';
 import { Platform,Button, StyleSheet, Text, View } from 'react-native';
 import Plus,{ Portal,Component } from 'react-native-plus';
 import React  from 'react';
