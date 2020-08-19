@@ -12,6 +12,7 @@
     "react-native-plus.podspec"
   ],
   "scripts": {
+    "pub": "npm publish --access=public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
