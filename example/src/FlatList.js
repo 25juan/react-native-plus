@@ -1,31 +1,51 @@
 import React from "react" ;
-import { Text } from "react-native";
+import {StyleSheet, Text} from "react-native";
 import { FlatList } from "react-native-plus" ;
 import {View,} from "react-native";
-
+let collection = [] ;
 function fetchData(data) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
+      if(collection.length > 30){
+        resolve([])
+      }
       const list = new Array(10).fill(0).map(item => {
-         return Math.random()*10000+10000
+         return parseInt(Math.random()*10000)+10000
       });
+      collection = [ ...collection, ...list ]
       resolve(list)
     },1000)
   })
 }
 
-export default () => {
+function renderItem({ item,index }) {
   return (
-    <FlatList onRefresh={fetchData}/>
+    <View style={styles.row}>
+      <Text style={styles.text}>{item}</Text>
+    </View>
+  )
+}
+export default () => {
+  React.useEffect(() => {
+    collection = [] ;
+  },[]);
+  return (
+    <FlatList
+      renderItem={renderItem}
+      onLoadMore={fetchData}
+      onRefresh={fetchData}/>
   )
 }
 const styles = {
   row:{
-    paddingVertical:16,
-    paddingHorizontal:16
+    flexDirection: "row",
+    borderBottomColor: "#ccc",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
   },
   text:{
     fontSize:16,
-    color:"#999"
+    color:"#333"
   }
 }
