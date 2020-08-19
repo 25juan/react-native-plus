@@ -1,4 +1,4 @@
-import {toast, loading, actionSheet, alert} from "./components/Portal";
+import {toast, loading, actionSheet, alert,shareCard} from "./components/Portal";
 export Portal  from "./components/Portal";
 function invoke(obj,method,params) {
   if(!obj){
@@ -14,14 +14,18 @@ export default {
   },
   showLoading(option) {
     invoke(loading,'show',option)
-
   },
   hideLoading() {
     invoke(loading,'hide')
-
   },
   showModal(option) {
     invoke(alert,'show',option)
+  },
+  showShareCard(option){
+    invoke(shareCard,'show',option)
+  },
+  hideShareCard(option){
+    invoke(shareCard,'hide',option)
   },
   hideModal() {
     invoke(alert,'hide')
