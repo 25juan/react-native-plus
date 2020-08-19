@@ -1,8 +1,8 @@
 {
-  "name": "react-native-plus",
-  "title": "React Native Plus",
-  "version": "1.0.0",
-  "description": "TODO",
+  "name": "react-native-aplus",
+  "title": "React Native a Plus plugin",
+  "version": "0.0.1",
+  "description": "react native 日常工具类",
   "main": "index.js",
   "files": [
     "README.md",
