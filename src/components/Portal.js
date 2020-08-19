@@ -7,7 +7,7 @@ export let toast = null;
 export let loading = null;
 export let actionSheet = null ;
 export let alert = null ;
-export default () => {
+export default (props) => {
   const _toast = createRef();
   const _loading = createRef();
   const _actionSheet = createRef() ;
@@ -21,7 +21,7 @@ export default () => {
   return (
     <>
       <Toast ref={_toast}/>
-      <Loading ref={_loading}/>
+      <Loading customActivityIndicator={props.customActivityIndicator || null} ref={_loading}/>
       <ActionSheet ref={_actionSheet}/>
       <Alert ref={_alert}/>
     </>

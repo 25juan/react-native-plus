@@ -59,7 +59,8 @@ export default class Toast extends React.Component {
     this.setState({ ...state,visible:true },() => {
       Animated.timing(this.animateValue, {
         toValue: 1,
-        duration: 300
+        duration: 300,
+        useNativeDriver:false
       },{ useNativeDriver:false }).start();
     });
     this.timer = setTimeout(() => {
@@ -77,7 +78,8 @@ export default class Toast extends React.Component {
     }
     Animated.timing(this.animateValue, {
       toValue: 0,
-      duration: 300
+      duration: 300,
+      useNativeDriver:false
     },{ useNativeDriver:false }).start(() => {
       this.setState({ ...state });
     });

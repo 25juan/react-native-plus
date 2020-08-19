@@ -49,13 +49,16 @@ export default class Loading extends React.Component {
   };
 
   render() {
+    const { customActivityIndicator } = this.props ;
     const theme = themes[this.state.theme] ;
     const indicator = indicatorProps ||  theme.indicatorProps || {} ;
     return (
       <Modal visible={this.state.visible} animationType={"fade"} transparent>
         <View style={[theme.maskBox]}>
           <View style={[theme.box]}>
-            <ActivityIndicator  { ...indicator }/>
+            {
+              customActivityIndicator?customActivityIndicator(indicator):<ActivityIndicator  { ...indicator }/>
+            }
             <Text style={[theme.text]}>{this.state.title}</Text>
           </View>
         </View>

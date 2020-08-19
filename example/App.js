@@ -8,15 +8,17 @@
  * https://github.com/facebook/react-native
  */
 
-import React  from 'react';
-import { Platform,Button, StyleSheet, Text, View } from 'react-native';
-import Plus,{ Portal,Component } from 'react-native-plus';
+import React from 'react';
+import {ScrollView, Button, StyleSheet, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+import Plus, {Portal, Component} from 'react-native-plus';
 
-export default class App extends Component{
+export default class App extends Component {
   state = {
     status: 'starting',
-    message: '--'
+    message: '--',
+    customActivityIndicator: null
   };
+
   componentDidMount() {
     Plus.sampleMethod('Testing', 123, (message) => {
       this.setState({
@@ -25,68 +27,140 @@ export default class App extends Component{
       });
     });
   }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Portal/>
-        <Button title={"点击显示toast在顶部"} onPress={()=>Plus.showToast('hello toast')}/>
-        <Button title={"点击显示toast在中部"} onPress={()=>Plus.showToast({ title:"hello",duration: Plus.Toast.DURATION.LONG,position: Plus.Toast.POSITION.CENTER })}/>
-        <Button title={"点击显示toast在底部"} onPress={()=>Plus.showToast({ title:"hello",duration: Plus.Toast.DURATION.LONG,position: Plus.Toast.POSITION.BOTTOM })}/>
+      <SafeAreaView style={styles.container}>
+        <Portal customActivityIndicator={this.state.customActivityIndicator}/>
+        <ScrollView style={styles.scroll}>
+          <View style={styles.section}>
+            <Text style={styles.titleStyle}>Toast</Text>
+          </View>
+          <TouchableOpacity style={styles.row} onPress={() => Plus.showToast('hello toast')}>
+            <Text style={styles.textStyle}>点击显示toast在顶部</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.row} onPress={() => Plus.showToast({
+            title: "hello",
+            duration: Plus.Toast.DURATION.LONG,
+            position: Plus.Toast.POSITION.CENTER
+          })}>
+            <Text style={styles.textStyle}>点击显示toast在中部</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.row} onPress={() => Plus.showToast({
+            title: "hello",
+            duration: Plus.Toast.DURATION.LONG,
+            position: Plus.Toast.POSITION.BOTTOM
+          })}>
+            <Text style={styles.textStyle}>点击显示toast在底部</Text>
+          </TouchableOpacity>
 
-        <Button title={"点击显示loading"} onPress={()=>{
-          Plus.showLoading('数据加载中...');
-          setTimeout(() =>{
-            Plus.hideLoading()
-          },2000)
-        }}/>
+          <View style={styles.section}>
+            <Text style={styles.titleStyle}>loading</Text>
+          </View>
+          <TouchableOpacity style={styles.row} onPress={() => {
+            Plus.showLoading('数据加载中...');
+            setTimeout(() => {
+              Plus.hideLoading()
+            }, 2000)
+          }}>
+            <Text style={styles.textStyle}>点击显示loading</Text>
+          </TouchableOpacity>
 
-        <Button title={"点击显示loading 主题2"} onPress={()=>{
-          Plus.showLoading({
-            title:'数据加载中...',
-            theme: Plus.Loading.THEME.THEME2
-          });
-          setTimeout(() =>{
-            Plus.hideLoading()
-          },2000)
-        }}/>
+          <TouchableOpacity style={styles.row} onPress={() => {
+            Plus.showLoading({
+              title: '数据加载中...',
+              theme: Plus.Loading.THEME.THEME2
+            });
+            setTimeout(() => {
+              Plus.hideLoading()
+            }, 2000)
+          }}>
+            <Text style={styles.textStyle}>点击显示loading主题2</Text>
+          </TouchableOpacity>
 
-        <Button title={"点击显示loading 主题3"} onPress={()=>{
-          Plus.Loading.setIndicatorProps({ // 设置loading的颜色
-            color:'#f50', size:'large' })
-          Plus.showLoading({
-            title:'数据加载中...',
-            theme: Plus.Loading.THEME.THEME3
-          });
-          setTimeout(() =>{
-            Plus.hideLoading()
-          },2000)
-        }}/>
-        <Button title={"点击显示action sheet"} onPress={()=>{
-          Plus.showActionSheet({
-            title:'请选择',
-            message:'请选择一种水果',
-            itemList: ['香蕉','梨子','关闭'],
-            success(tapIndex) {
-              console.log(tapIndex)
-            }
-          });
-        }}/>
+          <TouchableOpacity style={styles.row} onPress={() => {
+            Plus.Loading.setIndicatorProps({ // 设置loading的颜色
+              color: '#f50', size: 'large'
+            })
+            Plus.showLoading({
+              title: '数据加载中...',
+              theme: Plus.Loading.THEME.THEME3
+            });
+            setTimeout(() => {
+              Plus.hideLoading()
+            }, 2000)
+          }}>
+            <Text style={styles.textStyle}>点击显示loading主题3</Text>
+          </TouchableOpacity>
 
-        <Button title={"点击显示弹框"} onPress={()=>{
-          Plus.showModal({
-            title:"消息",
-            message:'hello world',
-            onConfirm(){
-              Plus.hideModal()
-            }
-          });
-        }}/>
+          <TouchableOpacity style={styles.row} onPress={() => {
+            this.setState({
+              customActivityIndicator: () => <Text style={{color: '#f50'}}>我是自定义的图标</Text>
+            }, () => {
+              Plus.showLoading({
+                title: '数据加载中...',
+                theme: Plus.Loading.THEME.THEME3
+              });
+              setTimeout(() => {
+                this.setState({
+                  customActivityIndicator: null
+                }, () => Plus.hideLoading())
+              }, 2000)
+            });
+          }}>
+            <Text style={styles.textStyle}>自定义loading图标</Text>
+          </TouchableOpacity>
+          <View style={styles.section}>
+            <Text style={styles.titleStyle}>Action Sheet</Text>
+          </View>
 
-        <Text style={styles.welcome}>☆Plus example☆</Text>
-        <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
-        <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
-        <Text style={styles.instructions}>{this.state.message}</Text>
-      </View>
+          <TouchableOpacity style={styles.row} onPress={() => {
+            Plus.showActionSheet({
+              title: '请选择',
+              message: '请选择一种水果',
+              itemList: ['香蕉', '梨子', '关闭'],
+              cancelButtonIndex:2,
+              success(tapIndex) {
+                console.log(tapIndex)
+              }
+            });
+          }}>
+            <Text style={styles.textStyle}>点击显示actionsheet</Text>
+          </TouchableOpacity>
+          <View style={styles.section}>
+            <Text style={styles.titleStyle}>弹框</Text>
+          </View>
+          <TouchableOpacity style={styles.row} onPress={() => {
+            Plus.showModal({
+              title: "消息",
+              message: 'hello world',
+              onConfirm() {
+                Plus.hideModal()
+              }
+            });
+          }}>
+            <Text style={styles.textStyle}>点击显示confirm框</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.row} onPress={() => {
+            Plus.showModal({
+              title: "消息",
+              showConfirm: false,
+              message: 'hello world',
+              onConfirm() {
+                Plus.hideModal()
+              }
+            });
+          }}>
+            <Text style={styles.textStyle}>点击显示alert框</Text>
+          </TouchableOpacity>
+
+        </ScrollView>
+        {/*<Text style={styles.welcome}>☆Plus example☆</Text>*/}
+        {/*<Text style={styles.instructions}>STATUS: {this.state.status}</Text>*/}
+        {/*<Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>*/}
+        {/*<Text style={styles.instructions}>{this.state.message}</Text>*/}
+      </SafeAreaView>
     );
   }
 }
@@ -94,18 +168,35 @@ export default class App extends Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#ffffff',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  flex: {
+    flex: 1
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  row: {
+    flexDirection: "row",
+    borderBottomColor: "#ccc",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    paddingHorizontal: 32,
+    paddingVertical: 16,
   },
+  section:{
+    flexDirection: "row",
+    borderBottomColor: "#ccc",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+  },
+  textStyle: {
+    fontSize: 14,
+    color: "#333"
+  },
+  scroll: {
+    paddingVertical: 16
+  },
+  titleStyle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: "#333"
+  }
 });
