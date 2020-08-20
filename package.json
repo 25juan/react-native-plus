@@ -1,18 +1,19 @@
 {
   "name": "react-native-aplus",
-  "title": "React Native a Plus plugin",
-  "version": "0.0.2",
+  "version": "0.0.9",
   "description": "react native 日常工具类",
-  "main": "index.js",
+  "main": "./index.js",
+  "module": "./index.js",
   "files": [
     "README.md",
     "android",
     "index.js",
     "ios",
+    "src",
     "react-native-plus.podspec"
   ],
   "scripts": {
-    "pub": "npm publish --access=public",
+    "pub": "npm publish . --access=public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
