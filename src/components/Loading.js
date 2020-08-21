@@ -23,7 +23,7 @@ export default class Loading extends React.Component {
   timer = null ;
   show = (option = {}) =>{
     let state = {
-      theme: Loading.THEME.THEME1
+      theme: Loading.THEME.THEME3
     };
     if(typeof option === 'string'){
       state.title = option ;
