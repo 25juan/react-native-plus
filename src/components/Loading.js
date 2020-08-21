@@ -18,7 +18,7 @@ export default class Loading extends React.Component {
   state = {
     visible: false,
     title: '',
-    theme: Loading.THEME.THEME1
+    theme: Loading.THEME.THEME3
   };
   timer = null ;
   show = (option = {}) =>{
