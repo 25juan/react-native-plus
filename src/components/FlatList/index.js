@@ -6,8 +6,7 @@ const defaultPagination = { page_index:0, page_size:10, over:false, start:0, len
 
 export class FlatList extends Component {
     static propTypes = {
-        onRefresh: PropTypes.func,
-        onLoadMore: PropTypes.func,
+        fetchData: PropTypes.func
     };
 
     static defaultProps = {
@@ -50,19 +49,18 @@ export class FlatList extends Component {
      *下拉刷新功能
      */
     onRefresh = () => {
-        let { onRefresh } = this.props;
+        let { fetchData } = this.props;
 
         // RNDialog.Loading.show();
-        this.pagination = { ...defaultPagination };
-        if(typeof onRefresh !== "function" || this.state.refreshing){
+        this.pagination = { ...defaultPagination,refresh: true };
+        if(typeof fetchData !== "function" || this.state.refreshing){
             return ;
         }
         this.setRefreshing(true);
-        let promise = onRefresh(this.pagination);
+        let promise = fetchData(this.pagination);
         if( promise && promise.then && typeof  promise.then === 'function'){ // 重新刷新
             promise.then(data=>{
                 let empty = false ;
-                // RNDialog.Loading.hide({},true);
                 if( data.length<this.pagination.page_size ){ // 当刷新返回的数据小于page size 的时候则不进行触发加载更多的方法
                     this.pagination.over = true ;
                 }
@@ -73,7 +71,6 @@ export class FlatList extends Component {
                 this.setRefreshing(false);
             }).catch(()=>{
                 this.setRefreshing(false);
-                // RNDialog.Loading.hide();
             });
         }
     };
@@ -85,12 +82,13 @@ export class FlatList extends Component {
         if(pagination.over || this.state.loading){
             return ;
         }
-        let {onLoadMore} = this.props;
+        let {fetchData} = this.props;
         this.setLoading(true);
         pagination.page_index = pagination.page_index + 1 ;
         pagination.start = pagination.page_index *pagination.page_size ;
         pagination.length = pagination.page_size;
-        let promise = onLoadMore(pagination);
+        pagination.refresh = false ;
+        let promise = fetchData(pagination);
         if( promise && promise.then && typeof  promise.then === 'function'){
             promise.then(data=>{
                 if( data.length<this.pagination.page_size ){ // 当刷新返回的数据小于page size 的时候则不进行触发加载更多的方法
@@ -130,10 +128,7 @@ export class FlatList extends Component {
     };
 
     render() {
-        let {
-            onRefresh,
-            ...props
-        } = this.props;
+        let props = this.props;
         let contentStyle = this.state.data.length ? {} : styles.contentStyle;
         return <RNFlatList
             contentContainerStyle={contentStyle}
