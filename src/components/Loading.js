@@ -2,6 +2,7 @@ import React from "react" ;
 import {View, Text, StyleSheet, ActivityIndicator, Modal,} from "react-native" ;
 
 let indicatorProps = null ;
+let defaultTheme = null ;
 /**
  *
  * @returns {*}
@@ -12,18 +13,26 @@ export default class Loading extends React.Component {
     THEME2: 'box' ,
     THEME3: 'square' ,
   };
+
+  /**
+   * 全局设置主题
+   * @param theme
+   */
+  static setTheme(theme){
+    defaultTheme = theme ;
+  }
   static setIndicatorProps(props) {
     indicatorProps = props ;
   }
   state = {
     visible: false,
     title: '',
-    theme: Loading.THEME.THEME3
+    theme: defaultTheme || Loading.THEME.THEME3
   };
   timer = null ;
   show = (option = {}) =>{
     let state = {
-      theme: Loading.THEME.THEME3
+      theme: defaultTheme || Loading.THEME.THEME3
     };
     if(typeof option === 'string'){
       state.title = option ;

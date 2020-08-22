@@ -6,7 +6,7 @@ export default class ActionSheet extends React.Component{
     title: '',
     itemList:[],
     cancelButtonIndex:0,
-    destructiveButtonIndex: null,
+    destructiveButtonIndex: -1,
     tintColor:'#1890ff',
     message:'',
     success(tapIndex){}
@@ -14,7 +14,7 @@ export default class ActionSheet extends React.Component{
   show = (option = {}) =>{
     let state = {
       cancelButtonIndex:option.itemList.length-1,
-      destructiveButtonIndex: null
+      destructiveButtonIndex: -1
     };
     if(typeof option === 'string'){
       state.title = option ;
