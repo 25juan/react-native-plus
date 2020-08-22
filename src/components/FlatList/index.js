@@ -1,5 +1,5 @@
 import React, {Component} from "react" ;
-import {FlatList as RNFlatList, View, Text,Image} from "react-native" ;
+import {FlatList as RNFlatList,ActivityIndicator, View, Text,Image} from "react-native" ;
 import PropTypes from "prop-types" ;
 
 const defaultPagination = { page_index:1, page_size:10, over:false, start:0, length:10 };
@@ -10,14 +10,7 @@ export class FlatList extends Component {
     };
 
     static defaultProps = {
-
-        onRefresh() {
-        },
-
-        onLoadMore() {
-
-        }
-
+        fetchData:()=>Promise.all([])
     };
     state = {
         refreshing: false,
@@ -25,10 +18,7 @@ export class FlatList extends Component {
         empty:false,
         data:[]
     };
-
     pagination = { ...defaultPagination } ;
-
-
     componentDidMount(){
         this.onRefresh();
     }
@@ -50,7 +40,6 @@ export class FlatList extends Component {
      */
     onRefresh = () => {
         let { fetchData } = this.props;
-
         // RNDialog.Loading.show();
         this.pagination = { ...defaultPagination,refresh: true };
         if(typeof fetchData !== "function" || this.state.refreshing){
@@ -108,7 +97,12 @@ export class FlatList extends Component {
             return null ;
         }
         let text = "加载中...";
-        return <View style={{paddingVertical: 8}}><Text style={styles.footerTextStyle}>{text}</Text></View>
+        return (
+          <View style={{paddingVertical: 8,justifyContent: 'center',flexDirection:'row'}}>
+              <ActivityIndicator color={"#999999"} size={"small"}/>
+              <Text style={[styles.footerTextStyle,{ marginLeft:6 }]}>{text}</Text>
+          </View>
+        )
     };
     /**
      * 渲染空数据
@@ -120,27 +114,27 @@ export class FlatList extends Component {
         }
         let text = "暂无数据";
         return (
-            <View style={styles.emptyStyle.containerStyle}>
-                <Image style={styles.emptyStyle.imgStyle} source={require("./icon/empty.png")}/>
-                <Text style={styles.emptyStyle.textStyle}>{text}</Text>
-            </View>
+          <View style={styles.emptyStyle.containerStyle}>
+              <Image style={styles.emptyStyle.imgStyle} source={require("./icon/empty.png")}/>
+              <Text style={styles.emptyStyle.textStyle}>{text}</Text>
+          </View>
         );
     };
 
     render() {
-        let props = this.props;
+        let { onRefresh,...props } = this.props;
         let contentStyle = this.state.data.length ? {} : styles.contentStyle;
         return <RNFlatList
-            contentContainerStyle={contentStyle}
-            keyExtractor={(item, index) => `${index}`}
-            initialNumToRender={8}
-            ListEmptyComponent={this.renderEmpty()}
-            ListFooterComponent={this.renderFooter()}
-            refreshing={this.state.refreshing}
-            onRefresh={this.onRefresh}
-            onEndReached={this.onEndReached}
-            onEndReachedThreshold={0.3}
-            {...props} data={this.state.data}/>
+          contentContainerStyle={contentStyle}
+          keyExtractor={(item, index) => `${index}`}
+          initialNumToRender={8}
+          ListEmptyComponent={this.renderEmpty()}
+          ListFooterComponent={this.renderFooter()}
+          refreshing={this.state.refreshing}
+          onRefresh={this.onRefresh}
+          onEndReached={this.onEndReached}
+          onEndReachedThreshold={0.3}
+          {...props} data={this.state.data}/>
     }
 }
 const styles = {
