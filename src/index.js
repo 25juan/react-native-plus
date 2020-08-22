@@ -15,6 +15,7 @@ export default {
    * @param {string} option.title 标题
    * @param {Array} option.itemList 菜单选项，字符串数组['菜单1','菜单2','取消']
    * @param {string} option.message 描述
+   * @param {Function} option.success 用户点击之后的回调函数,传入当前itemList的索引
    * @param {number} option.cancelButtonIndex 取消菜单的索引,默认是itemList最后一个选项
    * @param {number} option.destructiveButtonIndex 激活菜单的选,默认没有激活
    */
