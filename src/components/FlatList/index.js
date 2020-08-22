@@ -2,7 +2,7 @@ import React, {Component} from "react" ;
 import {FlatList as RNFlatList, View, Text,Image} from "react-native" ;
 import PropTypes from "prop-types" ;
 
-const defaultPagination = { page_index:0, page_size:10, over:false, start:0, length:10 };
+const defaultPagination = { page_index:1, page_size:10, over:false, start:0, length:10 };
 
 export class FlatList extends Component {
     static propTypes = {
