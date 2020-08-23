@@ -1,4 +1,5 @@
-import {toast, loading, actionSheet, alert,shareCard} from "./components/Portal";
+import {toast, loading, actionSheet, alert,shareCard, imagePreview} from "./components/Portal";
+import Toast from "./components/Toast"
 export Portal  from "./components/Portal";
 function invoke(obj,method,params) {
   if(!obj){
@@ -7,8 +8,13 @@ function invoke(obj,method,params) {
   return obj[method](params) ;
 }
 export default {
-  toast: null,
 
+  previewImage(option ={
+    images:[],
+    index:0
+  }){
+    invoke(imagePreview,'show',option)
+  },
   /**
    * 显示action sheet
    * @param {Object} option 显示action sheet的配置项
@@ -19,7 +25,15 @@ export default {
    * @param {number} option.cancelButtonIndex 取消菜单的索引,默认是itemList最后一个选项
    * @param {number} option.destructiveButtonIndex 激活菜单的选,默认没有激活
    */
-  showActionSheet(option) {
+  showActionSheet(option = {
+    title: '',
+    itemList:[],
+    cancelButtonIndex:0,
+    destructiveButtonIndex: -1,
+    tintColor:'#1890ff',
+    message:'',
+    success(tapIndex){}
+  }) {
     invoke(actionSheet,'show',option)
   },
   /**
@@ -28,7 +42,10 @@ export default {
    * @param {string} option.title 标题
    * @param {string} option.theme loading框的主题,可取值Plus.Loading.THEME.THEME1,Plus.Loading.THEME.THEME2,Plus.Loading.THEME.THEME3
    */
-  showLoading(option) {
+  showLoading(option = {
+    title: '',
+    theme: Loading.THEME.THEME3
+  }) {
     invoke(loading,'show',option)
   },
   /**
@@ -55,7 +72,7 @@ export default {
    */
   showModal(option = {
     title: "消息",
-    message: "Do you want to continue?",
+    message: "",
     showCancel: true,
     showConfirm: true,
     textCancel: "关闭",
@@ -104,7 +121,11 @@ export default {
    * @param {number} option.duration 显示时长
    * @param {number} option.position 显示位置
    */
-  showToast(option) {
+  showToast(option = {
+    title: '',
+    duration:Toast.DURATION.SHORT,
+    position: Toast.POSITION.TOP,
+  }) {
     invoke(toast,'show',option)
   }
 }

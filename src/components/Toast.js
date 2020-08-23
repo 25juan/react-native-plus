@@ -23,6 +23,7 @@ export default class Toast extends React.Component {
   state = {
     visible: false,
     title: '',
+    duration: Toast.DURATION.SHORT,
     position: Toast.POSITION.TOP
   };
   constructor(props) {
