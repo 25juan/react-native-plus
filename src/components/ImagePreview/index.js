@@ -1,7 +1,6 @@
 import React, {Component} from "react" ;
 import {Modal, Share, View, Text,Image, CameraRoll, Dimensions,Platform,TouchableOpacity, StatusBar} from "react-native";
 import ImageViewer from 'react-native-image-zoom-viewer';
-import { Button } from 'react-native-elements';
 
 let width = Dimensions.get('window').width ;
 let height = Dimensions.get('window').height ;
@@ -49,9 +48,9 @@ export default class extends Component {
     saveLocal = ()=>{
         let imgs = this.state.config.images[this.state.config.index] ;
         let url = imgs.url?imgs.url:imgs.props.source.uri ;
-        if(url){
-            window.download(url);
-        }
+        // if(url){
+        //     window.download(url);
+        // }
     };
 
     render() {
