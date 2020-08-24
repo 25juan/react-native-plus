@@ -47,6 +47,7 @@ class Alert extends Component {
 
   onConfirm() {
     const { onConfirm } = this.state;
+    this.hide();
     if (typeof onConfirm === "function") onConfirm();
   }
 
