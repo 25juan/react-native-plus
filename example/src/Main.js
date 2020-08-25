@@ -192,6 +192,39 @@ export default class App extends Component {
             <Text style={styles.textStyle}>显示sharecard</Text>
           </TouchableOpacity>
 
+          <View style={styles.section}>
+            <Text style={styles.titleStyle}>ImageViewer放大</Text>
+          </View>
+          <TouchableOpacity style={styles.row} onPress={() => {
+            Plus.previewImage({
+              images:['https://ruoyi.vip/images/ic_item_01.png','https://ruoyi.vip/images/ic_item_02.png'],
+              index:0
+            })
+
+          }}>
+            <Text style={styles.textStyle}>显示图片预览</Text>
+          </TouchableOpacity>
+
+          <View style={styles.section}>
+            <Text style={styles.titleStyle}>Prompt</Text>
+          </View>
+          <TouchableOpacity style={styles.row} onPress={() => {
+            Plus.showPrompt({
+              title:"prompt",
+              text:"hello world",
+              onConfirm:(text) => {
+                setTimeout(() =>{
+                  alert(text)
+                },1000)
+              }
+            })
+
+          }}>
+            <Text style={styles.textStyle}>Prompt输入框</Text>
+          </TouchableOpacity>
+
+
+
         </ScrollView>
         {/*<Text style={styles.welcome}>☆Plus example☆</Text>*/}
         {/*<Text style={styles.instructions}>STATUS: {this.state.status}</Text>*/}

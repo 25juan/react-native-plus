@@ -1,4 +1,4 @@
-import {toast, loading, actionSheet, alert,shareCard, imagePreview} from "./components/Portal";
+import {toast, loading, actionSheet, alert,shareCard, imagePreview,prompt} from "./components/Portal";
 import Toast from "./components/Toast"
 export Portal  from "./components/Portal";
 function invoke(obj,method,params) {
@@ -86,6 +86,42 @@ export default {
   }) {
     invoke(alert,'show',option)
   },
+
+  /**
+   * 显示对话框
+   * @param {Object} option 显示对话框的配置项
+   * @param {string} option.title 标题
+   * @param {string} option.message 对话框消息
+   * @param {boolean} option.showCancel 是否显示取消按钮
+   * @param {boolean} option.showConfirm 是否显示确认按钮
+   * @param {string} option.textCancel 取消按钮文本
+   * @param {string} option.textCancel 确认按钮文本
+   * @param {Function} option.closeOnPressMask 点击遮罩是否关闭
+   * @param {Function} option.closeOnPressBack 自定义Android返回键按钮事件
+   * @param {boolean} option.useNativeDriver 是否用原生动画驱动
+   * @param {Function} option.onCancel 点击取消按钮触发回调
+   * @param {Function} option.onConfirm 点击确认按钮触发回调
+   * @param {Function} option.onClose 关闭对话框触发回调
+   */
+  showPrompt(option = {
+    title: "消息",
+    text: '',
+    placeholder: '',
+    inputProps:{},
+    showCancel: true,
+    showConfirm: true,
+    textCancel: "关闭",
+    textConfirm: "确认",
+    closeOnPressMask: false,
+    closeOnPressBack: false,
+    useNativeDriver: false,
+    onCancel: null,
+    onConfirm: null,
+    onClose: null
+  }) {
+    invoke(prompt,'show',option)
+  },
+
   /**
    * 显示分享面板
    * @param {Object} option 显示分享面板的配置项

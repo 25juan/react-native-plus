@@ -5,6 +5,7 @@ import ActionSheet from "./ActionSheet";
 import Alert from "./Alert";
 import ShareCard from "./ShareCard";
 import ImagePreview from "./ImagePreview";
+import Prompt from "./Prompt" ;
 
 export let toast = null;
 export let loading = null;
@@ -12,12 +13,14 @@ export let actionSheet = null ;
 export let alert = null ;
 export let shareCard = null ;
 export let imagePreview = null ;
+export let prompt = null ;
 const _toast = createRef();
 const _loading = createRef();
 const _actionSheet = createRef() ;
 const _alert = createRef() ;
 const _shareCard = createRef() ;
 const _imagePreview = createRef() ;
+const _prompt = createRef() ;
 /**
  * 此处不能用函数式组件，用了函数式组件可能造成渲染问题
  */
@@ -29,6 +32,7 @@ export default class extends React.Component{
     alert = _alert.current ;
     shareCard = _shareCard.current ;
     imagePreview = _imagePreview.current ;
+    prompt = _prompt.current ;
   }
 
   render() {
@@ -41,6 +45,7 @@ export default class extends React.Component{
         <Alert ref={_alert}/>
         <ShareCard ref={_shareCard}/>
         <ImagePreview ref={_imagePreview}/>
+        <Prompt ref={_prompt}/>
         {props.children}
       </>
     )
