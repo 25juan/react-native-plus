@@ -106,6 +106,7 @@ const Styles = StyleSheet.create({
     zIndex: 99,
     position: 'absolute',
     left: 0,
+    elevation: 999,
     right: 0,
     flexDirection: 'column',
     alignItems: 'center',
