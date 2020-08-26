@@ -161,6 +161,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     fontSize:14,
     borderWidth:StyleSheet.hairlineWidth,
+    paddingVertical:0,
     borderColor:"#ccc",
     paddingHorizontal: 8
   },
