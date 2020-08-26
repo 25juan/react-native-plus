@@ -8,26 +8,29 @@ const SUPPORTED_ORIENTATIONS = [
   "landscape-left",
   "landscape-right"
 ];
+const defaultState = {
 
+  visible: false,
+
+  customStyles: {},
+  title: "消息",
+  message: "Do you want to continue?",
+  showCancel: true,
+  showConfirm: true,
+  textCancel: "关闭",
+  textConfirm: "确认",
+  closeOnPressMask: false,
+  closeOnPressBack: false,
+  useNativeDriver: false,
+  onCancel: null,
+  onConfirm: null,
+  onClose: null
+};
 class Alert extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false,
-
-      customStyles: {},
-      title: "消息",
-      message: "Do you want to continue?",
-      showCancel: true,
-      showConfirm: true,
-      textCancel: "关闭",
-      textConfirm: "确认",
-      closeOnPressMask: false,
-      closeOnPressBack: false,
-      useNativeDriver: false,
-      onCancel: null,
-      onConfirm: null,
-      onClose: null
+      ...defaultState
     };
     this.springValue = new Animated.Value(0);
 
@@ -47,7 +50,7 @@ class Alert extends Component {
 
   onConfirm() {
     const { onConfirm } = this.state;
-    this.hide();
+    this._hide();
     if (typeof onConfirm === "function") onConfirm();
   }
 
@@ -66,11 +69,22 @@ class Alert extends Component {
 
   hide() {
     const { onClose } = this.props;
-    this.setState({ visible: false }, () => {
-      this.springValue.setValue(0);
-      if (typeof onClose === "function") onClose();
-    });
+    this._hide(onClose);
   }
+  _hide = (callback) => {
+    console.log("callback....")
+    const { useNativeDriver } = this.state;
+    Animated.timing(this.springValue, {
+      toValue: 2,
+      useNativeDriver
+    }).start(() => {
+      this.setState({ ...defaultState }, () => {
+        this.springValue.setValue(0);
+        if (typeof callback === "function") callback();
+      });
+    });
+  };
+
 
   render() {
     const {
@@ -104,8 +118,18 @@ class Alert extends Component {
             style={[
               styles.container,
               {
-                transform: [{ scale: this.springValue }]
+                transform: [{
+                  scale: this.springValue.interpolate({
+                    inputRange: [0, 1, 2],
+                    outputRange: [0, 1, 1.2]  // 0 : 150, 0.5 : 75, 1 : 0
+                  })
+                }],
+                opacity: this.springValue.interpolate({
+                  inputRange: [0, 1,2],
+                  outputRange: [0,1, 0]  // 0 : 150, 0.5 : 75, 1 : 0
+                })
               },
+
               customStyles.container
             ]}
           >

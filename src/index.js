@@ -1,6 +1,8 @@
-import {toast, loading, actionSheet, alert,shareCard, imagePreview,prompt} from "./components/Portal";
+import {toast, loading, actionSheet, alert,shareCard, imagePreview,prompt,cityPicker} from "./components/Portal";
 import Toast from "./components/Toast"
+import cities from "./components/CityPicker/city";
 export Portal  from "./components/Portal";
+
 function invoke(obj,method,params) {
   if(!obj){
     return
@@ -8,6 +10,9 @@ function invoke(obj,method,params) {
   return obj[method](params) ;
 }
 export default {
+  showCityPicker(option = { cities,success : (city)=>{} }){
+    invoke(cityPicker,'show',option)
+  },
 
   previewImage(option ={
     images:[],

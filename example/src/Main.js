@@ -152,7 +152,6 @@ export default class App extends Component {
               title: "消息",
               message: 'hello world',
               onConfirm() {
-                Plus.hideModal()
               }
             });
           }}>
@@ -165,7 +164,7 @@ export default class App extends Component {
               showConfirm: false,
               message: 'hello world',
               onConfirm() {
-                Plus.hideModal()
+
               }
             });
           }}>
@@ -222,6 +221,24 @@ export default class App extends Component {
           }}>
             <Text style={styles.textStyle}>Prompt输入框</Text>
           </TouchableOpacity>
+
+          <View style={styles.section}>
+            <Text style={styles.titleStyle}>城市选择</Text>
+          </View>
+          <TouchableOpacity style={styles.row} onPress={() => {
+            Plus.showCityPicker({
+              success:(text) => {
+                console.log(text)
+                setTimeout(() =>{
+                  alert(JSON.stringify(text))
+                },1000)
+              }
+            })
+          }}>
+            <Text style={styles.textStyle}>打开城市选择</Text>
+          </TouchableOpacity>
+
+
 
 
 
