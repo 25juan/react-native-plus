@@ -1,4 +1,4 @@
-import {toast, loading, actionSheet, alert,shareCard, imagePreview,prompt,cityPicker} from "./components/Portal";
+import {toast, loading, actionSheet, alert,shareCard, imagePreview,prompt,cityPicker,search} from "./components/Portal";
 import Toast from "./components/Toast"
 import cities from "./components/CityPicker/city";
 export Portal  from "./components/Portal";
@@ -10,8 +10,22 @@ function invoke(obj,method,params) {
   return obj[method](params) ;
 }
 export default {
+  /**
+   * 显示城市选择
+   * @param {Object} option 显示城市选择的配置项
+   * @param {string} option.cities 标题
+   * @param {Function} option.success 用户点击之后的回调函数,传入当前itemList的索引
+   */
   showCityPicker(option = { cities,success : (city)=>{} }){
     invoke(cityPicker,'show',option)
+  },
+  /**
+   * 显示检索界面
+   * @param {Object} option 显示检索界面的配置项
+   * @param {Function} option.success 用户输入关键字之后的回调函数
+   */
+  showSearch(option = { success : (keyword)=>{} }) {
+    invoke(search,'show',option)
   },
 
   previewImage(option ={
