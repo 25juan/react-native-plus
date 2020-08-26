@@ -36,7 +36,6 @@ export default class extends Component {
             }
             return [];
         }).then(tags => {
-            console.log(tags)
             this.setState({ tags })
         })
     }
@@ -93,7 +92,7 @@ export default class extends Component {
                     <View style={Styles.historyContainer}>
                         <Text style={Styles.historyText}>搜索历史</Text>
                         <TouchableOpacity onPress={this.delAllTags} style={Styles.iconContainerStyle}>
-                            <Image tintColor={"#aaa"} resizeMode={'contain'} source={require('./icons/trash.png')} style={Styles.icon,Styles.delIcon}/>
+                            <Image tintColor={"#aaa"} resizeMode={'contain'} source={require('./icons/trash.png')} style={[Styles.icon,Styles.delIcon]}/>
                         </TouchableOpacity>
                     </View>
                     <View style={[Styles.historyContainer,{ paddingTop:0 }]}>
