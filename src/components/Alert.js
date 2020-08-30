@@ -72,7 +72,6 @@ class Alert extends Component {
     this._hide(onClose);
   }
   _hide = (callback) => {
-    console.log("callback....")
     const { useNativeDriver } = this.state;
     Animated.timing(this.springValue, {
       toValue: 2,
