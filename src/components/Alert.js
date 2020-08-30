@@ -195,7 +195,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 17,
     color: "#666",
-    paddingVertical: 16
+    paddingVertical: 16,
+    lineHeight:26,
+    paddingHorizontal:8
   },
   buttonContainer: {
     flexDirection: "row",
