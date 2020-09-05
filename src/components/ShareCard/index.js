@@ -1,9 +1,9 @@
 import React, {Component} from "react" ;
-import {Modal, Image, View, Text, TouchableOpacity, Animated} from "react-native";
+import {Modal, Image, Share,View, Text, TouchableOpacity, Animated} from "react-native";
 export const textLargeSize = 16 ;
 export const descTextSize = 14 ;
 export const infoTextSize = 12 ;
-const defaultList = ['qq',"wechat","qqzone","wechatzone","sina","more"] ;
+const defaultList = [['qq',"wechat","qqzone"],["wechatzone","sina","more"]] ;
 export default class extends Component {
     state = {
         visible: false,
@@ -14,8 +14,8 @@ export default class extends Component {
         this.animateValue = new Animated.Value(0);
     }
     onItemPress = (type) => {
-        typeof this.success === "function" && this.success(type);
         this.hide()
+        typeof this.success === "function" && this.success(type);
     };
 
     show = (option = {}) => {
@@ -45,6 +45,63 @@ export default class extends Component {
             });
         });
     };
+    renderShare = () =>{
+        const shareList = this.state.shareList ;
+        return shareList.map((row,idx) => {
+            return <View key={idx} style={Style.rowStyle}>{ this.renderRow(row) }</View>
+        })
+    };
+
+    renderRow = (row) => {
+        return row.map(cell =>{
+            if(cell === 'qq'){
+                return (
+                    <TouchableOpacity key={cell} onPress={() => this.onItemPress('qq')} style={Style.itemStyle}>
+                        <Image source={require("./icons/QQ.png")} style={Style.iconStyle}/>
+                        <Text style={Style.itemTextStyle}>QQ</Text>
+                    </TouchableOpacity>
+                )
+            }else if (cell === 'wechat'){
+                return (
+                    <TouchableOpacity onPress={() => this.onItemPress('wechat_session')}
+                                      key={cell}
+                                      style={Style.itemStyle}>
+                        <Image source={require("./icons/wechat.png")} style={Style.iconStyle}/>
+                        <Text style={Style.itemTextStyle}>微信</Text>
+                    </TouchableOpacity>
+                )
+            }else if (cell === 'qqzone'){
+                return (
+                    <TouchableOpacity key={cell} onPress={() => this.onItemPress('qzone')} style={Style.itemStyle}>
+                        <Image source={require("./icons/qqzone.png")} style={Style.iconStyle}/>
+                        <Text style={Style.itemTextStyle}>QQ空间</Text>
+                    </TouchableOpacity>
+                )
+            }else if (cell === 'wechatzone'){
+                return (
+                    <TouchableOpacity key={cell} onPress={() => this.onItemPress('wechat_timeLine')}
+                                      style={Style.itemStyle}>
+                        <Image source={require("./icons/friendzone.png")} style={Style.iconStyle}/>
+                        <Text style={Style.itemTextStyle}>朋友圈</Text>
+                    </TouchableOpacity>
+                )
+            }else if (cell === 'sina'){
+                return (
+                    <TouchableOpacity key={cell} onPress={() => this.onItemPress('sina_weibo')}  style={Style.itemStyle}>
+                        <Image source={require("./icons/sina.png")} style={Style.iconStyle}/>
+                        <Text style={Style.itemTextStyle}>微博</Text>
+                    </TouchableOpacity>
+                )
+            }else if (cell === 'more'){
+                return (
+                    <TouchableOpacity key={cell} onPress={() => this.onItemPress('more')} style={Style.itemStyle}>
+                        <Image source={require("./icons/more.png")} style={Style.iconStyle}/>
+                        <Text style={Style.itemTextStyle}>更多</Text>
+                    </TouchableOpacity>
+                )
+            }
+        });
+    };
 
     render() {
         return (
@@ -59,37 +116,7 @@ export default class extends Component {
                         <View style={Style.titleContainerStyle}>
                             <Text style={Style.titleStyle}>分享</Text>
                         </View>
-                        <View style={Style.rowStyle}>
-                            <TouchableOpacity onPress={() => this.onItemPress('qq')} style={Style.itemStyle}>
-                                <Image source={require("./icons/QQ.png")} style={Style.iconStyle}/>
-                                <Text style={Style.itemTextStyle}>QQ</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.onItemPress('qzone')} style={Style.itemStyle}>
-                                <Image source={require("./icons/qqzone.png")} style={Style.iconStyle}/>
-                                <Text style={Style.itemTextStyle}>QQ空间</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.onItemPress('wechat_session')}
-                                              style={Style.itemStyle}>
-                                <Image source={require("./icons/wechat.png")} style={Style.iconStyle}/>
-                                <Text style={Style.itemTextStyle}>微信</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={Style.rowStyle}>
-                            <TouchableOpacity onPress={() => this.onItemPress('wechat_timeLine')}
-                                              style={Style.itemStyle}>
-                                <Image source={require("./icons/friendzone.png")} style={Style.iconStyle}/>
-                                <Text style={Style.itemTextStyle}>朋友圈</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.onItemPress('sina_weibo')}  style={Style.itemStyle}>
-                                <Image source={require("./icons/sina.png")} style={Style.iconStyle}/>
-                                <Text style={Style.itemTextStyle}>微博</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.onItemPress('more')} style={Style.itemStyle}>
-                                <Image source={require("./icons/more.png")} style={Style.iconStyle}/>
-                                <Text style={Style.itemTextStyle}>更多</Text>
-                            </TouchableOpacity>
-                        </View>
-
+                        { this.renderShare() }
                     </Animated.View>
                 </TouchableOpacity>
             </Modal>
