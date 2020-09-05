@@ -41,9 +41,6 @@ export default class extends Component {
     toggleModal = (callback) => {
         this.state.visible = !this.state.visible;
         this.setState(this.state,callback);
-        if(!this.state.visible && Platform.OS === 'android'){
-            StatusBar.setBackgroundColor(window.Colors.headerBackgroundColor);
-        }
     };
     saveLocal = ()=>{
         let imgs = this.state.config.images[this.state.config.index] ;
@@ -55,34 +52,35 @@ export default class extends Component {
 
     render() {
         return (
-            <Modal
-                transparent={false}
-                animated={true}
-                onRequestClose={()=>this.toggleModal()}
-                animationType={'fade'}
-                visible={this.state.visible}>
-                <View style={{ flex:1,backgroundColor:'#000' }}>
-                    {/*<TouchableOpacity onPress={ ()=>this.toggleModal(this.closeBack) }*/}
-                    {/*                  activeOpacity={0.8}*/}
-                    {/*                  style={Style.btnLeftContainerStyle}>*/}
-                    {/*    <Image style={Style.btnIconStyle} source={require('./icons/arrow-left.png')}/>*/}
-                    {/*</TouchableOpacity>*/}
+          <Modal
+            transparent={false}
+            animated={true}
+            onRequestClose={()=>this.toggleModal()}
+            animationType={'fade'}
+            visible={this.state.visible}>
+              <View style={{ flex:1,backgroundColor:'#000' }}>
+                  <StatusBar backgroundColor={"#000"} barStyle={'light-content'}/>
+                  {/*<TouchableOpacity onPress={ ()=>this.toggleModal(this.closeBack) }*/}
+                  {/*                  activeOpacity={0.8}*/}
+                  {/*                  style={Style.btnLeftContainerStyle}>*/}
+                  {/*    <Image style={Style.btnIconStyle} source={require('./icons/arrow-left.png')}/>*/}
+                  {/*</TouchableOpacity>*/}
 
-                    {/*<Button type={"clear"}*/}
-                    {/*        onPress={ ()=>this.saveLocal() }*/}
-                    {/*        containerStyle={Style.btnRightContainerStyle}*/}
-                    {/*        icon={{size:26, type:"ionicon",color:'#fff',name:'md-download'}} />*/}
-                    <ImageViewer index={this.state.config.index}
-                                 enableSwipeDown={true}
-                                 saveToLocalByLongPress={false}
-                                 onCancel={ ()=>this.toggleModal() }
-                                 onChange={index=>{
-                                     this.state.config.index = index ;
-                                     this.setState(this.state);
-                                 }}
-                                 imageUrls={this.state.config.images}/>
-                </View>
-            </Modal>
+                  {/*<Button type={"clear"}*/}
+                  {/*        onPress={ ()=>this.saveLocal() }*/}
+                  {/*        containerStyle={Style.btnRightContainerStyle}*/}
+                  {/*        icon={{size:26, type:"ionicon",color:'#fff',name:'md-download'}} />*/}
+                  <ImageViewer index={this.state.config.index}
+                               enableSwipeDown={true}
+                               saveToLocalByLongPress={false}
+                               onCancel={ ()=>this.toggleModal() }
+                               onChange={index=>{
+                                   this.state.config.index = index ;
+                                   this.setState(this.state);
+                               }}
+                               imageUrls={this.state.config.images}/>
+              </View>
+          </Modal>
         )
     }
 };
