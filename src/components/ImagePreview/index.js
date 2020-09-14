@@ -5,7 +5,7 @@ import {
     View,
     Text,
     Image,
-    CameraRoll,
+    SafeAreaView,
     Dimensions,
     Platform,
     TouchableOpacity,
@@ -23,15 +23,12 @@ export default class extends Component {
             images: [],
             index: 0,
             rightTitle: '',
-            title:'图片预览',
+            title:'预览',
             onRightPress: null
         }
     };
 
     show = (config, cb) => {
-        if (Platform.OS === 'android') {
-            StatusBar.setBackgroundColor('rgb(0,0,0)');
-        }
         this.state.config.images = config.images.map(item => {
             if (typeof item === "number") {
                 return {
@@ -47,6 +44,9 @@ export default class extends Component {
 
         });
         this.state.config.index = config.index || 0;
+        this.state.config.title = config.title || '预览';
+        this.state.config.onRightPress = config.onRightPress || null;
+        this.state.config.rightTitle = config.rightTitle || '';
         this.toggleModal();
         this.closeBack = cb;
     };
@@ -66,66 +66,67 @@ export default class extends Component {
 
     onRightPress = () => {
         const onRightPress = this.state.config.onRightPress ;
-        typeof onRightPress === 'function' && onRightPress();
+        typeof onRightPress === 'function' && onRightPress(this.toggleModal);
     }
 
     render() {
         return (
-            <Modal
-                transparent={false}
-                animated={true}
-                onRequestClose={() => this.toggleModal()}
-                animationType={'fade'}
-                visible={this.state.visible}>
-                <View style={{flex: 1, backgroundColor: '#000'}}>
-                    <StatusBar backgroundColor={"#000"} barStyle={'light-content'}/>
+          <Modal
+            transparent={false}
+            animated={true}
+            onRequestClose={() => this.toggleModal()}
+            animationType={'fade'}
+            visible={this.state.visible}>
+              <SafeAreaView style={{flex: 1, backgroundColor: '#000'}}>
+                  <StatusBar backgroundColor={"#000"} barStyle={'light-content'}/>
 
-                    <ImageViewer index={this.state.config.index}
-                                 enableSwipeDown={true}
-                                 saveToLocalByLongPress={false}
-                                 onCancel={() => this.toggleModal()}
-                                 renderHeader={() => {
-                                     return (
-                                         <View style={Style.headerContainer}>
-                                             <TouchableOpacity onPress={() => this.toggleModal(this.closeBack)}
-                                                               activeOpacity={0.8}
-                                                               style={Style.btnLeftContainerStyle}>
-                                                 <Image tintColor={'#fff'} style={Style.btnIconStyle}
-                                                        source={require('./icons/arrow-left.png')}/>
-                                             </TouchableOpacity>
+                  <ImageViewer index={this.state.config.index}
+                               enableSwipeDown={true}
+                               saveToLocalByLongPress={false}
+                               onCancel={() => this.toggleModal()}
+                               renderHeader={() => {
+                                   return (
+                                     <View style={Style.headerContainer}>
+                                         <TouchableOpacity onPress={() => this.toggleModal(this.closeBack)}
+                                                           activeOpacity={0.8}
+                                                           style={Style.btnLeftContainerStyle}>
+                                             <Image tintColor={'#fff'} style={Style.btnIconStyle}
+                                                    source={require('./icons/arrow-left.png')}/>
+                                         </TouchableOpacity>
 
-                                             <Text style={[Style.headerStyle]}>{ this.state.config.title ||'' }</Text>
-                                             {
-                                                 this.state.config.rightTitle?(
-                                                     <TouchableOpacity onPress={this.onRightPress}
-                                                                       activeOpacity={0.8}
-                                                                       style={Style.btnLeftContainerStyle}>
-                                                         <Text style={Style.rightTextStyle}>{ this.state.config.rightTitle }</Text>
-                                                     </TouchableOpacity>
-                                                 ):(
-                                                     <TouchableOpacity activeOpacity={0.8}
-                                                                       style={Style.btnLeftContainerStyle}>
-                                                         <Text style={Style.rightTextStyle}>{ this.state.config.rightTitle || ' ' }</Text>
-                                                     </TouchableOpacity>
-                                                 )
-                                             }
-                                         </View>
-                                     )
-                                 }}
-                                 onChange={index => {
-                                     this.state.config.index = index;
-                                     this.setState(this.state);
-                                 }}
-                                 imageUrls={this.state.config.images}/>
-                </View>
-            </Modal>
+                                         <Text style={[Style.headerStyle]}>{ this.state.config.title ||'' }</Text>
+                                         {
+                                             this.state.config.rightTitle?(
+                                               <TouchableOpacity onPress={this.onRightPress}
+                                                                 activeOpacity={0.8}
+                                                                 style={Style.btnLeftContainerStyle}>
+                                                   <Text style={Style.rightTextStyle}>{ this.state.config.rightTitle }</Text>
+                                               </TouchableOpacity>
+                                             ):(
+                                               <TouchableOpacity activeOpacity={0.8}
+                                                                 style={Style.btnLeftContainerStyle}>
+                                                   <Text style={Style.rightTextStyle}>{ this.state.config.rightTitle || ' ' }</Text>
+                                               </TouchableOpacity>
+                                             )
+                                         }
+                                     </View>
+                                   )
+                               }}
+                               onChange={index => {
+                                   this.state.config.index = index;
+                                   this.setState(this.state);
+                               }}
+                               imageUrls={this.state.config.images}/>
+              </SafeAreaView>
+          </Modal>
         )
     }
 };
 const Style = {
     headerContainer: {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor:'transparent'
     },
     btnLeftContainerStyle: {
         zIndex: 999,
@@ -141,14 +142,6 @@ const Style = {
         color: "#fff",
         textAlign: 'center',
         flex: 1,
-    },
-    btnRightContainerStyle: {
-        position: 'absolute',
-        right: 0,
-        top: 30,
-        paddingVertical: 16,
-        paddingHorizontal: 16,
-        zIndex: 999
     },
     btnIconStyle: {
         height: 16,

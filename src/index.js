@@ -30,7 +30,10 @@ export default {
 
   previewImage(option ={
     images:[],
-    index:0
+    index:0,
+    rightTitle: '',
+    title:'预览',
+    onRightPress: null
   }){
     invoke(imagePreview,'show',option)
   },
