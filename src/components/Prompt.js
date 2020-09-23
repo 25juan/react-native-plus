@@ -86,7 +86,7 @@ class Alert extends Component {
       closeOnPressMask,
       closeOnPressBack
     } = this.state;
-
+    const { style = {},...inputProps } = this.state.inputProps ;
     const { visible } = this.state;
 
     return (
@@ -117,8 +117,8 @@ class Alert extends Component {
                 <View style={styles.inputBox}>
                   <TextInput
                     placeholder={this.state.placeholder}
-                    style={styles.textInput}
-                    { ...this.state.inputProps }
+                    style={[styles.textInput,style]}
+                    { ...inputProps }
                     onChangeText={text => this.setState({ text})}
                     value={this.state.text}/>
                 </View>
@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
     borderWidth:StyleSheet.hairlineWidth,
     paddingVertical:0,
     borderColor:"#ccc",
+    color:"#333",
     paddingHorizontal: 8
   },
   background: {
